@@ -43,11 +43,7 @@ app.use("/user", userRouter);
 app.use("/messages", messageRouter);
 await connectDB();
 
-if (process.env.NODE_ENV !== "production") {
-  const PORT = process.env.PORT || 3000;
-  server.listen(PORT, () => {
-    console.log(`Chat App Server Running on PORT: ${PORT}`);
-  });
-}
-
-export default server
+const PORT = process.env.PORT || 3000;
+server.listen(PORT, () => {
+  console.log(` Chat App Server Running on PORT: ${PORT}`);
+});
