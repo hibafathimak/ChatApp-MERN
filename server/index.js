@@ -41,11 +41,13 @@ app.use(express.json({ limit: "4mb" }));
 app.use("/status", (req, res) => res.send("Server is Live"));
 app.use("/user", userRouter);
 app.use("/messages", messageRouter);
-
-// Start Server
-const PORT = process.env.PORT || 3000;
 await connectDB();
 
-server.listen(PORT, () => {
-  console.log(`🚀 Chat App Server Running on PORT: ${PORT}`);
-});
+if (process.env.NODE_ENV !== "production") {
+  const PORT = process.env.PORT || 3000;
+  server.listen(PORT, () => {
+    console.log(`Chat App Server Running on PORT: ${PORT}`);
+  });
+}
+
+export default server
